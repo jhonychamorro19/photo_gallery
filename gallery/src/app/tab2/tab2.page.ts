@@ -9,8 +9,13 @@ import { PhotoService } from '../services/photo.service';
 })
 export class Tab2Page {
   public photos: Photo[] = []; 
-  constructor(private photoSvc: PhotoService) {
-    this.photos = photoSvc.getPhotos();
+
+  constructor(private photoSvc: PhotoService) {}
+
+  ngOnInit (){
+    this.photoSvc.loadSaved().then(() => {
+      this.photos = this.photoSvc.getPhotos();
+    });
   }
 
   newPhoto(): void {
